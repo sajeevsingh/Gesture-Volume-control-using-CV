@@ -46,6 +46,9 @@ try:
                 smoothness = 10
                 volPer = smoothness * round(volPer / smoothness)
                 fingers = detector.fingersUp()
+                #print(fingers)
+                if fingers == [0, 0, 0, 0, 0] or [1, 0, 0, 0, 0]:
+                    volume.SetMasterVolumeLevelScalar(0,None) ## Muting the system if fingers are closed
                 if not fingers[4]:
                     volume.SetMasterVolumeLevelScalar(volPer / 100, None)
                     cv2.circle(img, (lineInfo[4], lineInfo[5]), 15, (0, 255, 0), cv2.FILLED)
